@@ -17,8 +17,6 @@ export class AuthController {
 
   @Post()
   signIn(@Request() req) {
-    console.log(req);
-
     return this.authService.signIn(req.body);
   }
 }

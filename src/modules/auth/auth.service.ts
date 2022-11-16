@@ -22,13 +22,10 @@ export class AuthService {
   @UseGuards(AuthGuard('local'))
   @Post('auth/login')
   async signIn(user: User) {
-    console.log(user);
-
     const verifyIfUserIsValid = await this.validateUser(
       user.username,
       user.password,
     );
-    console.log(verifyIfUserIsValid);
 
     const payload = { username: user.username, sub: user.id };
     return {
@@ -38,7 +35,6 @@ export class AuthService {
 
   async validateUser(username: string, password: string): Promise<any> {
     const user = await this.userService.findOneByUsername(username);
-    console.log(password);
 
     if (!user) {
       throw new BadRequestException(AUTH_ERRORS.userDoesntExist);
