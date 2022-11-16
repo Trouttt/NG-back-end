@@ -16,7 +16,22 @@ export class AccountsService {
 
     return this.accountRepository.save(account);
   }
-  findBalanceById(id: string) {
+  async findAccountById(id: string): Promise<Account> {
     return this.accountRepository.findOne({ where: { id } });
+  }
+
+  async updateAccount(updateAccountDto: {
+    account: Account;
+    value: number;
+    isCreditedAccount: boolean;
+  }): Promise<Account> {
+    const newAccount = updateAccountDto.account;
+    newAccount.balance = updateAccountDto.isCreditedAccount
+      ? newAccount.balance + updateAccountDto.value
+      : newAccount.balance - updateAccountDto.value;
+    return this.accountRepository.save({
+      ...updateAccountDto.account,
+      ...newAccount,
+    });
   }
 }

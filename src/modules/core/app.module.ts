@@ -4,6 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { TypeOrmConfigService } from 'src/shared/typeorm/config/typeorm-config.service';
 import { AccountsModule } from '../accounts/accounts.module';
 import { AuthModule } from '../auth/auth.module';
+import { TransactionsModule } from '../transactions/transactions.module';
 import { UsersModule } from '../users/users.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -15,6 +16,7 @@ import { AppService } from './app.service';
       imports: [ConfigModule],
       useClass: TypeOrmConfigService,
     }),
+    TransactionsModule,
     AuthModule,
     UsersModule,
     AccountsModule,

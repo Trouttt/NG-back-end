@@ -60,10 +60,9 @@ export class UsersService {
   }
 
   async findOneByUsername(username: string) {
-    return this.userRepository.findOne({ where: { username } });
-  }
-
-  async findAll() {
-    return this.userRepository.find();
+    return this.userRepository.findOne({
+      where: { username },
+      relations: ['account'],
+    });
   }
 }
