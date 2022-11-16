@@ -11,8 +11,8 @@ export class AccountsService {
     @InjectRepository(Account)
     private readonly accountRepository: Repository<Account>,
   ) { }
-  create(createAccountDto: CreateAccountDto) {
-    const account = this.accountRepository.create(createAccountDto);
+  async create(createAccountDto: CreateAccountDto): Promise<Account> {
+    const account: Account = this.accountRepository.create(createAccountDto);
 
     return this.accountRepository.save(account);
   }
@@ -21,8 +21,8 @@ export class AccountsService {
     return `This action returns all accounts`;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} account`;
+  findOne(id: string) {
+    return this.accountRepository.findOne({ where: { id } });
   }
 
   update(id: number, updateAccountDto: UpdateAccountDto) {
