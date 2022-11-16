@@ -16,20 +16,7 @@ export class AccountsService {
 
     return this.accountRepository.save(account);
   }
-
-  findAll() {
-    return `This action returns all accounts`;
-  }
-
-  findOne(id: string) {
+  findBalanceById(id: string) {
     return this.accountRepository.findOne({ where: { id } });
-  }
-
-  update(id: number, updateAccountDto: UpdateAccountDto) {
-    return `This action updates a #${id} account`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} account`;
   }
 }
