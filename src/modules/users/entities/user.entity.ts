@@ -16,7 +16,7 @@ export class User {
   @JoinColumn()
   account: Account;
 
-  @Column()
+  @Column({ unique: true })
   username: string;
 
   @Column()

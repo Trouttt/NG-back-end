@@ -33,6 +33,13 @@ export class UsersService {
   }
 
   async create(createUserDto: CreateUserDto) {
+    const userAlreadyExist = await this.findOneByUsername(
+      createUserDto.username,
+    );
+
+    if (userAlreadyExist) {
+      throw new BadRequestException(USER_ERRORS.userAlreadyExist);
+    }
     const user: CreateUserDto = this.userRepository.create(createUserDto);
 
     const salt = await bcrypt.genSalt(10);
@@ -50,5 +57,13 @@ export class UsersService {
     const account = await this.accountService.create({ balance: 100 });
 
     return this.userRepository.save({ ...userCreated, account: account });
+  }
+
+  async findOneByUsername(username: string) {
+    return this.userRepository.findOne({ where: { username } });
+  }
+
+  async findAll() {
+    return this.userRepository.find();
   }
 }
