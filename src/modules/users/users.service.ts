@@ -36,7 +36,6 @@ export class UsersService {
     const userAlreadyExist = await this.findOneByUsername(
       createUserDto.username,
     );
-    console.log(createUserDto);
 
     if (userAlreadyExist) {
       throw new BadRequestException(USER_ERRORS.userAlreadyExist);
