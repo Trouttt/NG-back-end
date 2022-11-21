@@ -7,23 +7,31 @@
 ## Description
 
 Foi utilizado NEST. Pra rodar é necessário ter o docker instalado, criar uma imagem do postgreSQL e fazer ter uma env parecida com essa, ex:
-
+```
 NODE_ENV=development
+
 NEST_API_PORT=3012
 
 SECURITY_SALT=20
 
 DB_CONNECTION=postgres
-#DB_HOST=postgres
-DB_HOST=localhost
-DB_USERNAME=postgres
-DB_PASSWORD=tiktok@123
-DB_DATABASE=NG
-DB_PORT=5432
-DB_SYNC=false
-DB_SSL=false
-DB_LOGGING=info
 
+DB_HOST=localhost
+
+DB_USERNAME=postgres
+
+DB_PASSWORD=tiktok@123
+
+DB_DATABASE=NG
+
+DB_PORT=5432
+
+DB_SYNC=false
+
+DB_SSL=false
+
+DB_LOGGING=info
+```
 
 ## Installation
 
