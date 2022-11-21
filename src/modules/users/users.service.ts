@@ -5,7 +5,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
-import { Repository } from 'typeorm';
+import { In, Repository } from 'typeorm';
 import { ConfigService } from '@nestjs/config';
 import { AccountsService } from '../accounts/accounts.service';
 import { Account } from '../accounts/entities/account.entity';
@@ -36,6 +36,7 @@ export class UsersService {
     const userAlreadyExist = await this.findOneByUsername(
       createUserDto.username,
     );
+    console.log(createUserDto);
 
     if (userAlreadyExist) {
       throw new BadRequestException(USER_ERRORS.userAlreadyExist);
@@ -63,6 +64,14 @@ export class UsersService {
     return this.userRepository.findOne({
       where: { username },
       relations: ['account'],
+    });
+  }
+
+  async findTransactionUsersByIds(accountsId: string[]) {
+    return this.userRepository.find({
+      where: {
+        account: In(accountsId),
+      },
     });
   }
 }

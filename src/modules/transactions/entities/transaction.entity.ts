@@ -14,13 +14,15 @@ export class Transaction {
   id: string;
 
   @ManyToOne(() => Account, (account) => account.id, {
-    cascade: false,
+    cascade: true,
+    eager: true,
   })
   @JoinColumn({ name: 'debited_account', referencedColumnName: 'id' })
   debitedAccount?: Account;
 
   @ManyToOne(() => Account, (account) => account.id, {
-    cascade: false,
+    cascade: true,
+    eager: true,
   })
   @JoinColumn({ name: 'credited_account', referencedColumnName: 'id' })
   creditedAccount?: Account;
